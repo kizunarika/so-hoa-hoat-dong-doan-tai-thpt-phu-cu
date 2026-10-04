@@ -1,10 +1,10 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { createClient } from "thay cái này bằng api key của supabase, google gõ supabase và đk tk rồi lấy api ";
 
 /* ================================
     SUPABASE CONFIGURATION
    ================================ */
-const SUPABASE_URL = "https://ebgcoiodnhblrvgeiocc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_IjP5w6hRutIzHeOF9Ei8fg_Tw_HI6oU";
+const SUPABASE_URL = "cái này cũng vậy";
+const SUPABASE_ANON_KEY = "cái này cũng thế";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const activeWorkbooks = {};
@@ -79,9 +79,7 @@ function restoreCustomTabs(mainTabId, tabsMetaArray) {
     let actionToolbarHTML = "";
     const panelId = `${mainTabId}-view-${meta.uniqueId}`;
 
-    // ==========================================
-    // KHỐI 1: EXCEL VÀ GOOGLE SHEET SỬ DỤNG CHUNG GIAO DIỆN CÔNG CỤ
-    // ==========================================
+
     if (meta.type === "excel" || meta.type === "ggsheet") {
       viewerContent = `
         <div class="excel-viewer">
@@ -111,9 +109,7 @@ function restoreCustomTabs(mainTabId, tabsMetaArray) {
               ${meta.isDownloadable ? `<button class="btn btn-secondary export-btn" data-tab="${panelId}"><i class="fas fa-download"></i> Xuất Dữ Liệu</button>` : ""}
           </div>`;
     }
-    // ==========================================
-    // KHỐI 2: WORD VÀ PDF
-    // ==========================================
+
     else {
       if (meta.type === "word") {
         viewerContent = `<div class="word-viewer-card word-viewer-container" data-tab="${panelId}"></div>`;
@@ -220,13 +216,11 @@ async function renderWordFromUrl(tabId, fileUrl) {
   );
   if (containers.length === 0) return;
 
-  // LUỒNG 1: Nếu file Word đã được chuyển đổi sang PDF -> Gọi trực tiếp renderPDF
   if (fileUrl.toLowerCase().includes(".pdf")) {
     await renderPDF(tabId, fileUrl);
     return;
   }
 
-  // LUỒNG 2: Nếu là file .docx gốc chưa chuyển đổi -> Render qua docx-preview bọc giao diện A4
   try {
     const response = await fetch(fileUrl);
     if (!response.ok) throw new Error("Không thể tải file Word");
@@ -265,13 +259,12 @@ async function renderWordFromUrl(tabId, fileUrl) {
 }
 
 async function renderPDF(tabId, url) {
-  // SỬA Ở ĐÂY: Thêm .word-viewer-container để có thể render cả file Word (sau khi đã chuyển sang PDF)
+
   const containers = document.querySelectorAll(
     `.pdf-viewer-container[data-tab="${tabId}"], .word-viewer-container[data-tab="${tabId}"]`,
   );
   if (containers.length === 0) return;
 
-  // Cấu hình worker cho PDF.js
   if (
     typeof pdfjsLib !== "undefined" &&
     !pdfjsLib.GlobalWorkerOptions.workerSrc
@@ -281,7 +274,7 @@ async function renderPDF(tabId, url) {
   }
 
   containers.forEach(async (container) => {
-    // 1. Reset container và thêm khung bao bọc (Wrapper)
+
     container.innerHTML = `
       <div class="a4-pdf-wrapper">
         <div class="pdf-loader">
@@ -305,21 +298,18 @@ async function renderPDF(tabId, url) {
       for (let pageNum = 1; pageNum <= numPages; pageNum++) {
         const page = await pdf.getPage(pageNum);
 
-        // Tính toán tỉ lệ zoom (Scale). Điều chỉnh scale (ví dụ: 1.5) để nét chữ rõ hơn
         const scale = 1.5;
         const viewport = page.getViewport({ scale: scale });
 
-        // Tạo thẻ div đại diện cho 1 trang A4
+
         const pageContainer = document.createElement("div");
         pageContainer.className = "a4-page";
 
-        // Tạo thẻ canvas để vẽ PDF
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
-        // Tùy chỉnh style cho canvas để vừa vặn trong div (responsive)
         canvas.style.width = "100%";
         canvas.style.height = "auto";
 
@@ -334,9 +324,8 @@ async function renderPDF(tabId, url) {
         await page.render(renderContext).promise;
       }
 
-      // 4. Hoàn tất tải, ẩn loader và hiện nội dung
       loaderDiv.style.display = "none";
-      // Sử dụng flex để kích hoạt flex-direction: column và align-items: center giúp trang giấy ở chính giữa
+
       contentDiv.style.display = "flex";
     } catch (error) {
       console.error("Lỗi khi render PDF:", error);
@@ -397,9 +386,7 @@ function renderSheetRows(htmlContent, container) {
   if (table) table.classList.add("excel-table");
 }
 
-/* ================================
-    KHỞI TẠO SUPABASE & ĐỒNG BỘ
-   ================================ */
+
 async function initSupabaseSync() {
   try {
     let {
@@ -423,7 +410,7 @@ async function initSupabaseSync() {
           restoreCustomTabs(row.tab_id, row.sub_tabs_meta);
         }
       });
-
+//
       rows.forEach((row) => {
         const tabId = row.tab_id;
         if (row.word_file_url) renderWordFromUrl(tabId, row.word_file_url);
@@ -486,8 +473,7 @@ function loadDefaultDemoData() {
     jsonArray.forEach((item) => rows.push(headers.map((h) => item[h])));
     renderWorkbookFromData(tabId, { "Dữ Liệu Tổng Hợp": rows });
   });
-  // Nếu có hàm renderWordHTML, gọi ở đây (phụ thuộc thư viện của bạn)
-  // Object.keys(defaultWordDocs).forEach((tabId) => { renderWordHTML(tabId, defaultWordDocs[tabId]); });
+
 }
 
 function initAdminAuth() {
@@ -864,7 +850,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         showToast("Đang gửi file lên hệ thống chuyển đổi...", "info");
-        const secretKey = "ow5Tv3QX5QXcZN0sb1eQkWK6JHYrcfAL";
+        const secretKey = "thay cái này bằng key của convertapi";
         const formData = new FormData();
         formData.append("File", file);
 
@@ -1264,7 +1250,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Khởi tạo các hàm an toàn
   if (typeof initSupabaseSync === "function") initSupabaseSync();
   if (typeof initAdminAuth === "function") initAdminAuth();
 });
@@ -1417,24 +1402,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   const themeIcon = themeToggleBtn.querySelector("i");
 
-  // 1. Kiểm tra bộ nhớ xem người dùng đã chọn theme nào trước đó chưa
   const currentTheme = localStorage.getItem("app-theme");
   
   if (currentTheme === "light") {
     body.classList.add("light-theme");
-    // Đổi icon sang Mặt trời vì đang ở nền trắng
     if (themeIcon) {
       themeIcon.classList.remove("fa-moon");
       themeIcon.classList.add("fa-sun");
     }
   }
 
-  // 2. Sự kiện khi click vào nút chuyển Theme
   themeToggleBtn.addEventListener("click", function () {
-    // Bật/tắt class light-theme trên thẻ body
     body.classList.toggle("light-theme");
     
-    // Nếu body đang có class light-theme -> Cập nhật icon và lưu LocalStorage
     if (body.classList.contains("light-theme")) {
       localStorage.setItem("app-theme", "light");
       if (themeIcon) {
@@ -1442,7 +1422,7 @@ document.addEventListener("DOMContentLoaded", function () {
         themeIcon.classList.add("fa-sun");
       }
     } else {
-      // Ngược lại, xoá bỏ nền trắng trở về nền tối mặc định
+
       localStorage.setItem("app-theme", "dark");
       if (themeIcon) {
         themeIcon.classList.remove("fa-sun");
