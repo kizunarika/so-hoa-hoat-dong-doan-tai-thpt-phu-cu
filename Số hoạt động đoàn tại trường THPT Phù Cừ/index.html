@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SỐ HOÁ HOẠT ĐỘNG ĐOÀN TẠI TRƯỜNG THPT PHÙ CỪ</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SheetJS Library for Excel Parsing -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <!-- Thêm JSZip-->
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+    <!-- Thêm Docx-Preview -->
+    <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.1.20/dist/docx-preview.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="bg-tab-tong-quan">
+
+    <header class="navbar">
+        <div class="header-left">
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <div class="nav-logo">
+                <div class="nav-logo-icon">
+                    <img src="logo.png" alt="">
+                </div>
+                <div class="nav-title-group">
+                    <span class="nav-title-main"> TRƯỜNG THPT PHÙ CỪ</span>
+                </div>
+            </div>
+
+            <!-- Main Top Header Nav Tabs -->
+
+            <nav class="nav-tabs" id="nav-tabs">
+                <div class="nav-item active" data-target="tab-tong-quan">
+                    <i class="fas fa-home"></i> Giới thiệu
+                </div>
+
+                <div class="nav-item" data-target="tab-van-ban">
+                    <i class="fas fa-file-lines"></i> Văn bản
+                </div>
+
+                <div class="nav-item" data-target="tab-nen-nep">
+                    <i class="fas fa-clipboard-check"></i> NỀN nếp
+                </div>
+
+                <div class="nav-item" data-target="tab-van-nghe">
+                    <i class="fas fa-music"></i> Văn nghệ
+                </div>
+                <div class="nav-item" data-target="tab-bao-tuong"> <i class="fas fa-newspaper"></i> Báo tường </div>
+
+                <div class="nav-item" data-target="tab-bon-cay">
+                    <i class="fas fa-seedling"></i> Bồn cây
+                </div>
+
+                <div class="nav-item" data-target="tab-tdtt">
+                    <i class="fas fa-futbol"></i> TDTT
+                </div>
+
+                <div class="nav-item" data-target="tab-cuoc-thi">
+                    <i class="fas fa-trophy"></i> Cuộc thi
+                </div>
+
+                <div class="nav-item" data-target="tab-bai-viet">
+                    <i class="fas fa-pen-to-square"></i> Bài viết
+                </div>
+                <!-- TAB KÉO XUỐNG (Đã chặn sự kiện click chuyển tab) -->
+                <div class="nav-item dropdown" onclick="event.stopPropagation();">
+                    <span><i class="fas fa-globe"></i> Liên kết <i
+                            class="fas fa-chevron-down dropdown-arrow"></i></span>
+
+                    <div class="dropdown-menu" onclick="event.stopPropagation();">
+                        <a href="https://c3phucu.hungyen.edu.vn" target="_blank" class="dropdown-item">
+                            <i class="fas fa-school"></i> Website Trường THPT Phù Cừ
+                        </a>
+                        <a href="https://doanthanhnien.vn" target="_blank" class="dropdown-item">
+                            <i class="fas fa-flag"></i> Cổng thông tin TƯ Đoàn
+                        </a>
+                        <a href="https://hungyen.edu.vn" target="_blank" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i> Sở GD&ĐT Hưng Yên
+                        </a>
+                        <a href="https://www.facebook.com/p/Tr%C6%B0%E1%BB%9Dng-THPT-Ph%C3%B9-C%E1%BB%AB-H%C6%B0ng-Y%C3%AAn-100076193776001/"
+                            target="_blank" class="dropdown-item">
+                            <i class="fab fa-facebook"></i> Fanpage Trường THPT PHÙ CỪ
+                        </a>
+                        <a href="https://doanthanhnienthptpc2.blogspot.com/2025/09/hoc-cua-em-bai-viet-cua-lop-12a2-nam.html?m=1"
+                            target="_blank" class="dropdown-item">
+                            <i class="fab fa-blogger"></i> CÁC HOẠT ĐỘNG CỦA TRƯỜNG THPT PHÙ CỪ
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="header-right">
+            <button id="themeToggleBtn" class="theme-toggle-btn" title="Chuyển chế độ Sáng/Tối">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <div class="nav-item login-btn" data-target="tab-login">
+                <i class="fas fa-user-circle"></i> Đăng nhập
+            </div>
+        </div>
+
+    </header>
+
+    <main class="content-container">
+
+        <div id="tab-tong-quan" class="tab-content active">
+            <!-- BANNER CHÍNH CỦA TRANG WEB -->
+            <div class="gov-banner-container">
+                <div class="gov-banner-bg-pattern"></div>
+
+                <div class="gov-banner-content">
+                    <div class="gov-banner-left">
+                        <div class="gov-logo-box">
+                            <img src="./co-dang.webp" alt="Logo Đoàn" class="gov-logo">
+                        </div>
+                        <div class="gov-title-box">
+                            <span class="gov-sub-title">ĐOÀN TNCS HỒ CHÍ MINH TRƯỜNG THPT PHÙ CỪ</span>
+                            <h1 class="gov-main-title">SỐ HÓA HOẠT ĐỘNG ĐOÀN TẠI TRƯỜNG THPT PHÙ CỪ</h1>
+                        </div>
+                    </div>
+
+                    <div class="gov-banner-right">
+                        <div class="skew-card side-card left-card">
+                            <div class="skew-img-inner">
+                                <img src="./resources/bg2.jpg" alt="Hoạt động 1">
+                            </div>
+                            <div class="skew-overlay"></div>
+                        </div>
+
+                        <div class="skew-card center-card">
+                            <div class="skew-img-inner">
+                                <img src="./resources/bg6.jpg" alt="Hoạt động 2">
+                            </div>
+                            <div class="skew-overlay"></div>
+                        </div>
+                        <div class="skew-card side-card right-card">
+                            <div class="skew-img-inner">
+                                <img src="./resources/bg4.jpg" alt="Hoạt động 3">
+                            </div>
+                            <div class="skew-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Carousel Slider -->
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Slide 1 -->
+                    <div class="slide active" style="background-image: url('./resources/bg9.jpg');">
+                        <div class="slide-overlay"></div>
+                        <div class="slide-content">
+                            <h2>ĐOÀN TRƯỜNG THPT PHÙ CỪ</h2>
+                            <p>Tiên phong chuyển đổi số trong mọi hoạt động Đoàn, nâng cao năng lực số cho đoàn viên
+                                thanh niên và lan tỏa tinh thần nhiệt huyết sáng tạo.</p>
+                            <div class="slide-stats">
+                                <div class="stat-badge">
+                                    <span class="stat-number">60+</span>
+                                    <span class="stat-label">Năm Truyền Thống</span>
+                                </div>
+                                <div class="stat-badge">
+                                    <span class="stat-number">1000+</span>
+                                    <span class="stat-label">Đoàn Viên Thanh Niên</span>
+                                </div>
+                                <div class="stat-badge">
+                                    <span class="stat-number">100%</span>
+                                    <span class="stat-label">Số Hóa Quản Lý</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide" style="background-image: url('./resources/bg8.jpg');">
+                        <div class="slide-overlay"></div>
+                        <div class="slide-content">
+                            <h2>PHONG TRÀO THI ĐUA NỀN NẾP & HỌC TẬP</h2>
+                            <p>Xây dựng NỀN nếp kỷ cương, phong trào "Học sinh 3 tốt" và ứng dụng công nghệ thông tin
+                                trong thi đua các chi đoàn.</p>
+                            <div class="slide-stats">
+                                <div class="stat-badge">
+                                    <span class="stat-number">33</span>
+                                    <span class="stat-label">Chi Đoàn Lớp</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide" style="background-image: url('./resources/bg5.jpg');">
+                        <div class="slide-overlay"></div>
+                        <div class="slide-content">
+                            <h2>VĂN NGHỆ & THỂ DỤC THỂ THAO</h2>
+                            <p>Sân chơi lành mạnh phát triển kỹ năng toàn diện, rèn luyện thể chất và bồi dưỡng tài năng
+                                cho thanh niên THPT Phù Cừ.</p>
+                            <div class="slide-stats">
+                                <div class="stat-badge">
+                                    <span class="stat-number">6+</span>
+                                    <span class="stat-label">Giải Đấu / Năm</span>
+                                </div>
+                                <div class="stat-badge">
+                                    <span class="stat-number">100%</span>
+                                    <span class="stat-label">Sôi Nổi Hào Hứng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-nav-btn slider-prev" id="sliderPrevBtn"><i
+                        class="fas fa-chevron-left"></i></button>
+                <button class="slider-nav-btn slider-next" id="sliderNextBtn"><i
+                        class="fas fa-chevron-right"></i></button>
+
+                <div class="slider-pagination" id="sliderPagination">
+                    <div class="slider-dot active" data-index="0"></div>
+                    <div class="slider-dot" data-index="1"></div>
+                    <div class="slider-dot" data-index="2"></div>
+                </div>
+            </div>
+
+            <!-- Overview Word Viewer -->
+            <!-- BỔ SUNG THẺ VIEW-PANEL NÀY BAO BỌC BÊN NGOÀI -->
+            <div class="view-panel view-tong-quan active" id="tab-tong-quan-view-tong-quan">
+                <div class="glass-panel">
+                    <div class="tab-header-banner">
+                        <div class="tab-title-group">
+                            <div class="tab-icon-box word-icon"><i class="fas fa-file-word"></i></div>
+                            <div>
+                                <h2 class="tab-title">TÀI LIỆU GIỚI THIỆU & NGHỊ QUYẾT ĐOÀN TRƯỜNG</h2>
+                                <p class="tab-subtitle">Nghị quyết, kế hoạch công tác số hóa Đoàn thanh niên THPT Phù Cừ
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="action-toolbar">
+                            <label class="btn btn-word admin-only">
+                                <i class="fas fa-cloud-arrow-up"></i> Tải Lên Word (.docx)
+                                <!-- Đã bổ sung class custom-upload -->
+                                <input type="file" class="word-upload-input custom-upload" data-tab="tab-tong-quan"
+                                    accept=".docx" style="display: none;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="word-viewer-card word-viewer-container" data-tab="tab-tong-quan">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-van-ban" class="tab-content">
+            <div class="tab-layout-container">
+                <!-- Sub Sidebar -->
+                <aside class="sub-sidebar" id="sidebar-van-ban">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> Danh Mục Văn Bản</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <!-- Nhóm nút khi bật chế độ chỉnh sửa (Ẩn mặc định) -->
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sub-nav-list">
+
+                    </div>
+                </aside>
+
+                <!-- Sub Content Display Area -->
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-nen-nep" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> THI ĐUA NỀN NẾP</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </aside>
+
+                <div class="sub-content-area">
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-van-nghe" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> PHONG TRÀO VĂN NGHỆ</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-bao-tuong" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> HỘI THI BÁO TƯỜNG</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-bon-cay" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> BỒN CÂY</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-tdtt" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> GIẢI ĐẤU TDTT</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-cuoc-thi" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> CUỘC THI VÀ PHONG TRÀO</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-bai-viet" class="tab-content">
+            <div class="tab-layout-container">
+                <aside class="sub-sidebar">
+                    <div class="sub-sidebar-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-layer-group"></i> BÀI VIẾT</span>
+                        <div class="header-default-actions">
+                            <button class="btn-add-new-tab admin-only" title="Thêm danh mục mới"
+                                aria-label="Thêm danh mục mới">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <!-- NÚT CHỈNH SỬA MỚI -->
+                            <button class="btn-edit-tabs" title="Chỉnh sửa danh mục">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                        <div class="header-edit-actions ">
+                            <button class="btn-mode-move" title="Chế độ di chuyển">
+                                <i class="fas fa-arrows-alt-v"></i>
+                            </button>
+                            <button class="btn-mode-delete" title="Chế độ xoá">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn-exit-edit" title="Hoàn tất">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <div class="sub-content-area">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: ĐĂNG NHẬP -->
+        <div class="tab-content" id="tab-login">
+            <div class="login-wrapper">
+                <div class="login-box">
+                    <div class="login-header">
+                        <img src="./logo.png" alt="">
+                        <h2>Đăng Nhập Quản Trị</h2>
+                        <p>Trường THPT Phù Cừ</p>
+                    </div>
+
+                    <form class="login-form">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Tên đăng nhập" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Mật khẩu" required>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            Đăng nhập <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="addTabModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h3><i class="fas fa-folder-plus"></i> Thêm Danh Mục Tài Liệu Mới</h3>
+                    <button type="button" id="closeModalBtn" class="close-btn"><i class="fas fa-times"></i></button>
+                </div>
+
+                <form id="addTabForm">
+                    <div class="form-group">
+                        <label for="newTabName">Tên danh mục (Tên Tab):</label>
+                        <input type="text" id="newTabName" required placeholder="VD: Kế hoạch Đoàn tháng 10...">
+                    </div>
+
+                    <!-- Ô MỚI 1: Chỉnh chữ nhỏ bên dưới name ở sidebar (desc) -->
+                    <div class="form-group">
+                        <label for="newTabDesc">Mô tả ngắn ở Menu (Tùy chọn):</label>
+                        <input type="text" id="newTabDesc" placeholder="VD: Bảng tính Excel, Kế hoạch chi tiết...">
+                    </div>
+
+                    <!-- Ô MỚI 2: Chỉnh chữ nhỏ bên dưới name trong card nội dung (subtitle) -->
+                    <div class="form-group">
+                        <label for="newTabSubtitle">Phụ đề card nội dung (Tùy chọn):</label>
+                        <input type="text" id="newTabSubtitle"
+                            placeholder="VD: Tài liệu tải lên tự động, Cập nhật tháng 10...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newTabType">Loại tệp dữ liệu:</label>
+                        <div class="custom-select-wrapper">
+                            <select id="newTabType" required>
+                                <option value="excel">Bảng tính Excel (.xlsx)</option>
+                                <option value="word">Văn bản Word (.docx)</option>
+                                <option value="pdf">Tài liệu PDF (.pdf)</option>
+                                <option value="ggsheet">Google Sheet (Trực tuyến)</option> <!-- Bổ sung tuỳ chọn này -->
+                            </select>
+                            <i class="fas fa-chevron-down select-icon"></i>
+                        </div>
+                    </div>
+
+                    <!-- Khối 1: Ô chọn File (Hiển thị mặc định) -->
+                    <div class="form-group" id="fileInputGroup">
+                        <label for="newTabFile">Nội dung (Chọn File đính kèm):</label>
+                        <input type="file" id="newTabFile" class="custom-file-input" required>
+                    </div>
+
+                    <!-- Khối 2: Ô nhập Link Google Sheet (Mặc định ẩn) -->
+                    <div class="form-group" id="linkInputGroup" style="display: none;">
+                        <label for="newTabLink">Link nhúng Google Sheet:</label>
+                        <input type="url" id="newTabLink" class="custom-file-input"
+                            placeholder="Dán đường link Google Sheet vào đây...">
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="newTabDownload" checked>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">Hiển thị nút "Tải xuống" cho Tab này</span>
+                        </label>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" id="cancelTabBtn" class="btn btn-secondary">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Xác nhận
+                            Thêm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Thư viện PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script type="module" src="script.js">
+
+    </script>
+</body>
+
+</html>
